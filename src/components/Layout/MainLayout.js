@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Button } from 'antd';
-import { Outlet, Link, useNavigate } from 'react-router-dom'; // Used to render child routes
-import { useTranslation } from 'react-i18next';
-import { Amplify } from 'aws-amplify';
+import React, { useState, useEffect } from "react";
+import { Layout, Menu, Button, Dropdown } from "antd";
+import { GlobalOutlined } from "@ant-design/icons";
+import { Outlet, Link, useNavigate } from "react-router-dom"; // Used to render child routes
+import { useTranslation } from "react-i18next";
+import { Amplify } from "aws-amplify";
 /* global Amplify */
-import './MainLayout.css'; // Import styles
+import "./MainLayout.css"; // Import styles
 
 const { Header, Content, Footer } = Layout;
 
 const MainLayout = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(); // Get i18n instance
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
@@ -29,25 +30,68 @@ const MainLayout = () => {
   async function signOut() {
     try {
       await Amplify.Auth.signOut();
-      navigate('/login');
+      navigate("/login");
     } catch (err) {
-      console.log('error signing out: ', err);
+      console.log("error signing out: ", err);
     }
   }
+
+  // Function to handle language change
+  const handleLanguageChange = (e) => {
+    i18n.changeLanguage(e.key);
+  };
+
+  // Language dropdown menu
+  const languageMenu = (
+    <Menu onClick={handleLanguageChange}>
+      <Menu.Item key="en">English</Menu.Item>
+      <Menu.Item key="ru">Русский</Menu.Item>
+    </Menu>
+  );
 
   return (
     <Layout className="main-layout">
       <Header className="main-layout-header">
-        <div className="logo">Haulino</div>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1"><Link to="/">{t('menu.home')}</Link></Menu.Item>
-          <Menu.Item key="2"><Link to="/create-order">{t('menu.createOrder')}</Link></Menu.Item>
+        <div className="logo">
+          <Link to="/" style={{ color: "white" }}>
+            Haulino
+          </Link>
+        </div>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          style={{ lineHeight: "64px", float: "right" }} // Align menu items to the right
+          selectable={false} // Disable selection highlighting for this menu
+        >
+          {/* Language Switcher Dropdown */}
+          <Dropdown overlay={languageMenu} placement="bottomRight">
+            <Button type="text" style={{ color: "white" }}>
+              <GlobalOutlined /> {i18n.language.split("-")[0].toUpperCase()}
+            </Button>
+          </Dropdown>
+
+          {/* Existing Menu Items */}
+          <Menu.Item key="createOrder">
+            <Link to="/create-order">{t("createOrder.title")}</Link>
+          </Menu.Item>
           {user ? (
-            <Button type="text" style={{ color: 'white' }} onClick={signOut}>{t('menu.signOut')}</Button>
+            <Menu.Item key="signOut">
+              <Button
+                type="text"
+                style={{ color: "white", padding: 0 }}
+                onClick={signOut}
+              >
+                {t("homepage.menu.signOut")} {/* Updated key */}
+              </Button>
+            </Menu.Item>
           ) : (
             <>
-              <Menu.Item key="3"><Link to="/login">{t('menu.login')}</Link></Menu.Item>
-              <Menu.Item key="4"><Link to="/signup">{t('menu.signUp')}</Link></Menu.Item>
+              <Menu.Item key="login">
+                <Link to="/login">{t("login.title")}</Link>
+              </Menu.Item>
+              <Menu.Item key="signUp">
+                <Link to="/signup">{t("homepage.menu.signUp")}</Link> {/* Updated key */}
+              </Menu.Item>
             </>
           )}
         </Menu>

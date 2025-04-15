@@ -8,13 +8,37 @@
   padding: 0 24px; /* Add some padding */
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribute items evenly */
+  justify-content: space-between; /* Changed to space-between for better distribution */
 }
 
 .logo {
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
+  margin-right: 20px; /* Add some spacing between logo and menu */
+}
+
+/* Ensure menu items are always visible */
+.main-layout-header .ant-menu {
+  flex: 1;
+  display: flex;
+  background: transparent;
+  border-bottom: none;
+}
+
+.main-layout-header .ant-menu-item {
+  display: inline-flex !important;
+  margin: 0 10px;
+}
+
+/* Override Ant Design's responsive behavior */
+.ant-menu-overflow-item {
+  display: inline-flex !important;
+  visibility: visible !important;
+}
+
+.ant-menu-overflow-item-rest {
+  display: none !important; /* Hide the overflow indicator (three dots) */
 }
 
 .main-layout-content {
