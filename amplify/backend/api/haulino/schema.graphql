@@ -1,0 +1,19 @@
+type User @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  email: String!
+  name: String
+  phone: String
+  orders: [Order] @connection(fields: ["id"])
+}
+
+type Order @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  whatToTransport: String!
+  fromAddress: String!
+  toAddress: String!
+  dateAndTime: AWSDateTime!
+  transportType: String!
+  numLoaders: Int
+  description: String
+  userID: ID! @index(name: "byUser")
+}

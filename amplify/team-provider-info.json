@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-haulino-dev-9848d-authRole",
+      "UnauthRoleArn": "arn:aws:iam::235494793518:role/amplify-haulino-dev-9848d-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::235494793518:role/amplify-haulino-dev-9848d-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-haulino-dev-9848d-deployment",
+      "UnauthRoleName": "amplify-haulino-dev-9848d-unauthRole",
+      "StackName": "amplify-haulino-dev-9848d",
+      "StackId": "arn:aws:cloudformation:us-east-2:235494793518:stack/amplify-haulino-dev-9848d/daf2bf90-19cc-11f0-b526-0649d0543be7",
+      "AmplifyAppId": "d1yqyj9mt4jkmt"
+    },
+    "categories": {
+      "auth": {
+        "haulinof9411bd2": {}
+      },
+      "api": {
+        "haulino": {}
+      }
+    }
+  }
+}

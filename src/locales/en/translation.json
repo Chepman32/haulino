@@ -1,0 +1,106 @@
+{
+  "brand": {
+    "name": "Haulino",
+    "slogan": "Move big. Move smart."
+  },
+  "homepage": {
+    "cta": {
+      "order": "Order a transport"
+    },
+    "services": {
+      "title": "Our Services"
+    },
+    "benefits": {
+      "title": "Why Choose Us?"
+    },
+    "menu": {
+      "home": "Home",
+      "createOrder": "Create Order",
+      "login": "Login",
+      "signUp": "Sign Up",
+      "signOut": "Sign Out"
+    }
+  },
+  "service": {
+    "furniture": {
+      "title": "Furniture Transport",
+      "description": "Safe and reliable furniture transportation services."
+    },
+    "appliances": {
+      "title": "Appliances Transport",
+      "description": "Expert transport for all types of appliances."
+    },
+    "movers": {
+      "title": "Loading Services",
+      "description": "Professional loading and unloading services."
+    }
+  },
+  "benefit": {
+    "fast": {
+      "title": "Fast",
+      "description": "Quick and efficient transportation solutions."
+    },
+    "reliable": {
+      "title": "Reliable",
+      "description": "Trustworthy and dependable service."
+    },
+    "transparent": {
+      "title": "Transparent",
+      "description": "Clear pricing and communication."
+    }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "username.required": "Please enter your username!",
+    "password": "Password",
+    "password.required": "Please enter your password!",
+    "button": "Login",
+    "success": "Login successful!",
+    "error": "Login failed: {{error}}",
+    "signupLink": "Don't have an account? Sign up now!"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "name": "Name",
+    "name.required": "Please enter your name!",
+    "email": "Email",
+    "email.required": "Please enter your email!",
+    "email.invalid": "Please enter a valid email!",
+    "phone": "Phone Number",
+    "phone.required": "Please enter your phone number!",
+    "password": "Password",
+    "password.required": "Please enter your password!",
+    "password.min": "Password must be at least 8 characters!",
+    "confirmPassword": "Confirm Password",
+    "confirmPassword.required": "Please confirm your password!",
+    "confirmPassword.match": "The two passwords that you entered do not match!",
+    "button": "Sign Up",
+    "success": "Sign up successful!",
+    "error": "Sign up failed: {{error}}",
+    "loginLink": "Already have an account? Login now!"
+  },
+  "createOrder": {
+    "title": "Create Order",
+    "whatToTransport": "What do you want to transport?",
+    "whatToTransport.required": "Please enter what you want to transport!",
+    "fromAddress": "From Address",
+    "fromAddress.required": "Please enter the pickup address!",
+    "toAddress": "To Address",
+    "toAddress.required": "Please enter the delivery address!",
+    "dateAndTime": "Date and Time",
+    "dateAndTime.required": "Please select the date and time!",
+    "transportType": "Type of Transport",
+    "transportType.required": "Please select the type of transport!",
+    "transportType.placeholder": "Select transport type",
+    "transportType.pickup": "Pickup",
+    "transportType.boxTruck": "Box Truck",
+    "numLoaders": "Number of Loaders",
+    "numLoaders.placeholder": "Select number of loaders",
+    "numLoaders.none": "None",
+    "numLoaders.person": "person",
+    "numLoaders.people": "people",
+    "description": "Description",
+    "button": "Create Order"
+  }
+}

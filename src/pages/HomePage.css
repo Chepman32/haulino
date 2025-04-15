@@ -1,0 +1,15 @@
+/* Styles for HomePage component */
+
+.homepage-container {
+  /* Add specific container styles if needed */
+}
+
+.hero-section .ant-typography {
+  margin-bottom: 1rem; /* Add spacing between titles */
+}
+
+/* Add more specific styles for sections, cards, etc. as needed */
+.ant-card-meta-avatar {
+  font-size: 24px; /* Adjust icon size in service cards */
+  padding-top: 5px;
+}

@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './config/i18n'; // Import i18n configuration
+import { Amplify } from 'aws-amplify'; // Import Amplify
+import awsExports from './aws-exports'; // Import Amplify config
+
+Amplify.configure(awsExports); // Configure Amplify
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback="Loading..."> {/* Wrap App with Suspense */}
+      <App />
+    </Suspense>
   </React.StrictMode>
 );
 

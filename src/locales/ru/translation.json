@@ -1,0 +1,106 @@
+{
+  "brand": {
+    "name": "Haulino",
+    "slogan": "Move big. Move smart."
+  },
+  "homepage": {
+    "cta": {
+      "order": "Заказать перевозку"
+    },
+    "services": {
+      "title": "Наши услуги"
+    },
+    "benefits": {
+      "title": "Почему выбирают нас?"
+    },
+    "menu": {
+      "home": "Главная",
+      "createOrder": "Создать заказ",
+      "login": "Войти",
+      "signUp": "Зарегистрироваться",
+      "signOut": "Выйти"
+    }
+  },
+  "service": {
+    "furniture": {
+      "title": "Перевозка мебели",
+      "description": "Безопасная и надежная перевозка мебели."
+    },
+    "appliances": {
+      "title": "Перевозка техники",
+      "description": "Профессиональная перевозка всех видов техники."
+    },
+    "movers": {
+      "title": "Услуги грузчиков",
+      "description": "Профессиональные услуги погрузки и разгрузки."
+    }
+  },
+  "benefit": {
+    "fast": {
+      "title": "Быстро",
+      "description": "Быстрые и эффективные решения для транспортировки."
+    },
+    "reliable": {
+      "title": "Надежно",
+      "description": "Надежный и проверенный сервис."
+    },
+    "transparent": {
+      "title": "Прозрачно",
+      "description": "Понятные цены и коммуникация."
+    }
+  },
+  "login": {
+    "title": "Войти",
+    "username": "Имя пользователя",
+    "username.required": "Пожалуйста, введите имя пользователя!",
+    "password": "Пароль",
+    "password.required": "Пожалуйста, введите пароль!",
+    "button": "Войти",
+    "success": "Вход выполнен успешно!",
+    "error": "Ошибка входа: {{error}}",
+    "signupLink": "Нет аккаунта? Зарегистрируйтесь сейчас!"
+  },
+  "signup": {
+    "title": "Зарегистрироваться",
+    "name": "Имя",
+    "name.required": "Пожалуйста, введите ваше имя!",
+    "email": "Электронная почта",
+    "email.required": "Пожалуйста, введите адрес электронной почты!",
+    "email.invalid": "Пожалуйста, введите действительный адрес электронной почты!",
+    "phone": "Номер телефона",
+    "phone.required": "Пожалуйста, введите ваш номер телефона!",
+    "password": "Пароль",
+    "password.required": "Пожалуйста, введите пароль!",
+    "password.min": "Пароль должен содержать не менее 8 символов!",
+    "confirmPassword": "Подтвердите пароль",
+    "confirmPassword.required": "Пожалуйста, подтвердите свой пароль!",
+    "confirmPassword.match": "Введенные вами пароли не совпадают!",
+    "button": "Зарегистрироваться",
+    "success": "Регистрация прошла успешно!",
+    "error": "Ошибка регистрации: {{error}}",
+    "loginLink": "Уже есть аккаунт? Войти сейчас!"
+  },
+  "createOrder": {
+    "title": "Создать заказ",
+    "whatToTransport": "Что вы хотите перевезти?",
+    "whatToTransport.required": "Пожалуйста, введите, что вы хотите перевезти!",
+    "fromAddress": "Адрес отправления",
+    "fromAddress.required": "Пожалуйста, введите адрес отправления!",
+    "toAddress": "Адрес назначения",
+    "toAddress.required": "Пожалуйста, введите адрес назначения!",
+    "dateAndTime": "Дата и время",
+    "dateAndTime.required": "Пожалуйста, выберите дату и время!",
+    "transportType": "Тип транспорта",
+    "transportType.required": "Пожалуйста, выберите тип транспорта!",
+    "transportType.placeholder": "Выберите тип транспорта",
+    "transportType.pickup": "Пикап",
+    "transportType.boxTruck": "Фургон",
+    "numLoaders": "Количество грузчиков",
+    "numLoaders.placeholder": "Выберите количество грузчиков",
+    "numLoaders.none": "Не нужны",
+    "numLoaders.person": "человек",
+    "numLoaders.people": "человека",
+    "description": "Описание",
+    "button": "Создать заказ"
+  }
+}

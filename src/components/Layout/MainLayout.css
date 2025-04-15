@@ -1,0 +1,31 @@
+.main-layout {
+  min-height: 100vh; /* Ensure layout takes full viewport height */
+}
+
+.main-layout-header {
+  background: #1A2A44; /* Midnight Blue */
+  color: #FFFFFF; /* White text */
+  padding: 0 24px; /* Add some padding */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribute items evenly */
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.main-layout-content {
+  padding: 24px;
+  /* Add more specific content styling later */
+}
+
+.main-layout-footer {
+  text-align: center;
+  background-color: #f0f2f5; /* Light grey background */
+  padding: 12px 24px;
+  font-size: 0.9em;
+  color: #555;
+}
