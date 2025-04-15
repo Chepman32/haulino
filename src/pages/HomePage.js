@@ -37,15 +37,8 @@ const HomePage = () => {
             type="primary"
             size="large"
             style={{ background: '#00FF99', borderColor: '#00FF99', color: '#1A2A44' }}
-            onClick={async () => {
-              try {
-                await Amplify.Auth.currentAuthenticatedUser(); // Corrected: Use Amplify.Auth
-                navigate('/create-order');
-              } catch (error) {
-                console.log('Not signed in:', error);
-                navigate('/login');
-              }
-            }}
+            // Simplify onClick: always navigate to the protected route
+            onClick={() => navigate('/create-order')}
           >
             {t('homepage.cta.order')}
           </Button>

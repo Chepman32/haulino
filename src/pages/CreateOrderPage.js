@@ -1,9 +1,11 @@
 import React from 'react';
-import { Form, Input, Button, Select, DatePicker, Typography, InputNumber } from 'antd';
+import { Form, Input, Button, Select, DatePicker, Typography } from 'antd'; // Removed InputNumber as it wasn't used
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Amplify } from 'aws-amplify'; // Corrected: Only Amplify needed here
-import { createOrder } from '../graphql/mutations'; // Corrected path
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react'; // Import the HOC
+import '@aws-amplify/ui-react/styles.css'; // Import styles for the Authenticator
+import { createOrder } from '../graphql/mutations';
 import './CreateOrderPage.css';
 
 const { Title } = Typography;
@@ -127,4 +129,5 @@ const CreateOrderPage = () => {
   );
 };
 
-export default CreateOrderPage;
+// Wrap the component with the HOC before exporting
+export default withAuthenticator(CreateOrderPage);

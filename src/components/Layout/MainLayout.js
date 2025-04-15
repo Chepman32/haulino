@@ -1,40 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Layout, Menu, Button, Dropdown } from "antd";
 import { GlobalOutlined } from "@ant-design/icons";
-import { Outlet, Link, useNavigate } from "react-router-dom"; // Used to render child routes
+import { Outlet, Link } from "react-router-dom"; // Used to render child routes
 import { useTranslation } from "react-i18next";
-import { Amplify } from "aws-amplify";
-/* global Amplify */
+import { useAuthenticator } from '@aws-amplify/ui-react'; // Import the hook
 import "./MainLayout.css"; // Import styles
 
 const { Header, Content, Footer } = Layout;
 
 const MainLayout = () => {
   const { t, i18n } = useTranslation(); // Get i18n instance
-  const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    checkUser();
-  }, []);
-
-  async function checkUser() {
-    try {
-      const user = await Amplify.Auth.currentAuthenticatedUser();
-      setUser(user);
-    } catch (err) {
-      setUser(null);
-    }
-  }
-
-  async function signOut() {
-    try {
-      await Amplify.Auth.signOut();
-      navigate("/login");
-    } catch (err) {
-      console.log("error signing out: ", err);
-    }
-  }
+  const { user, signOut } = useAuthenticator((context) => [context.user, context.signOut]); // Use the hook
 
   // Function to handle language change
   const handleLanguageChange = (e) => {
@@ -76,23 +52,27 @@ const MainLayout = () => {
             <Menu.Item key="createOrder">
               <Link to="/create-order">{t("createOrder.title")}</Link>
             </Menu.Item>
+            {/* Conditionally render based on user from useAuthenticator */}
             {user ? (
               <Menu.Item key="signOut">
                 <Button
                   type="text"
                   style={{ color: "white", padding: 0 }}
-                  onClick={signOut}
+                  onClick={signOut} // Use signOut from the hook
                 >
-                  {t("homepage.menu.signOut")} {/* Updated key */}
+                  {t("homepage.menu.signOut")}
                 </Button>
               </Menu.Item>
             ) : (
+              // Show Login/Sign Up links that navigate to the protected route to trigger Auth UI
               <>
                 <Menu.Item key="login">
-                  <Link to="/login">{t("login.title")}</Link>
+                  {/* Link to the protected route */}
+                  <Link to="/create-order">{t("login.title")}</Link>
                 </Menu.Item>
                 <Menu.Item key="signUp">
-                  <Link to="/signup">{t("homepage.menu.signUp")}</Link> {/* Updated key */}
+                   {/* Link to the protected route */}
+                  <Link to="/create-order">{t("homepage.menu.signUp")}</Link>
                 </Menu.Item>
               </>
             )}
