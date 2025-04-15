@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Button } from 'antd';
 import { Outlet, Link, useNavigate } from 'react-router-dom'; // Used to render child routes
 import { useTranslation } from 'react-i18next';
-import { Amplify, Auth } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
+/* global Amplify */
 import './MainLayout.css'; // Import styles
 
 const { Header, Content, Footer } = Layout;
@@ -18,7 +19,7 @@ const MainLayout = () => {
 
   async function checkUser() {
     try {
-      const user = await Auth.currentAuthenticatedUser();
+      const user = await Amplify.Auth.currentAuthenticatedUser();
       setUser(user);
     } catch (err) {
       setUser(null);
@@ -27,7 +28,7 @@ const MainLayout = () => {
 
   async function signOut() {
     try {
-      await Auth.signOut();
+      await Amplify.Auth.signOut();
       navigate('/login');
     } catch (err) {
       console.log('error signing out: ', err);

@@ -3,7 +3,7 @@ type User @model @auth(rules: [{allow: owner}]) {
   email: String!
   name: String
   phone: String
-  orders: [Order] @connection(fields: ["id"])
+  orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
 type Order @model @auth(rules: [{allow: owner}]) {
