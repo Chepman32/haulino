@@ -51,50 +51,61 @@ const MainLayout = () => {
 
   return (
     <Layout className="main-layout">
-      <Header className="main-layout-header">
+      {/* Apply Flexbox styling directly to the Header */}
+      <Header
+        className="main-layout-header"
+        style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+      >
+        {/* Logo remains on the left */}
         <div className="logo">
-          <Link to="/" style={{ color: "white" }}>
+          <Link to="/" style={{ color: "white", textDecoration: "none" }}>
             Haulino
           </Link>
         </div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          style={{ lineHeight: "64px", float: "right" }} // Align menu items to the right
-          selectable={false} // Disable selection highlighting for this menu
-        >
-          {/* Language Switcher Dropdown */}
+
+        {/* Container for right-aligned items */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {/* Menu items (without the language dropdown) */}
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            style={{ lineHeight: "64px", borderBottom: "none" }} // Remove float and bottom border
+            selectable={false}
+          >
+            {/* Existing Menu Items */}
+            <Menu.Item key="createOrder">
+              <Link to="/create-order">{t("createOrder.title")}</Link>
+            </Menu.Item>
+            {user ? (
+              <Menu.Item key="signOut">
+                <Button
+                  type="text"
+                  style={{ color: "white", padding: 0 }}
+                  onClick={signOut}
+                >
+                  {t("homepage.menu.signOut")} {/* Updated key */}
+                </Button>
+              </Menu.Item>
+            ) : (
+              <>
+                <Menu.Item key="login">
+                  <Link to="/login">{t("login.title")}</Link>
+                </Menu.Item>
+                <Menu.Item key="signUp">
+                  <Link to="/signup">{t("homepage.menu.signUp")}</Link> {/* Updated key */}
+                </Menu.Item>
+              </>
+            )}
+          </Menu>
+
+          {/* Language Switcher Dropdown - Placed after the Menu */}
           <Dropdown overlay={languageMenu} placement="bottomRight">
-            <Button type="text" style={{ color: "white" }}>
+            {/* Add some left margin for spacing */}
+            <Button type="text" style={{ color: "white", marginLeft: "16px" }}>
               <GlobalOutlined /> {i18n.language.split("-")[0].toUpperCase()}
             </Button>
           </Dropdown>
-
-          {/* Existing Menu Items */}
-          <Menu.Item key="createOrder">
-            <Link to="/create-order">{t("createOrder.title")}</Link>
-          </Menu.Item>
-          {user ? (
-            <Menu.Item key="signOut">
-              <Button
-                type="text"
-                style={{ color: "white", padding: 0 }}
-                onClick={signOut}
-              >
-                {t("homepage.menu.signOut")} {/* Updated key */}
-              </Button>
-            </Menu.Item>
-          ) : (
-            <>
-              <Menu.Item key="login">
-                <Link to="/login">{t("login.title")}</Link>
-              </Menu.Item>
-              <Menu.Item key="signUp">
-                <Link to="/signup">{t("homepage.menu.signUp")}</Link> {/* Updated key */}
-              </Menu.Item>
-            </>
-          )}
-        </Menu>
+        </div>
       </Header>
       <Content className="main-layout-content">
         {/* The Outlet component renders the matched child route component */}
