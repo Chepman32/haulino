@@ -3,13 +3,16 @@ import { Form, Input, Button, Select, DatePicker, Typography } from 'antd'; // R
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Amplify } from 'aws-amplify';
-import { withAuthenticator } from '@aws-amplify/ui-react'; // Import the HOC
 import '@aws-amplify/ui-react/styles.css'; // Import styles for the Authenticator
 import { createOrder } from '../graphql/mutations';
 import './CreateOrderPage.css';
+import { getCurrentUser } from 'aws-amplify/auth';
+import { generateClient } from 'aws-amplify/api'; // Import generateClient
 
 const { Title } = Typography;
 const { Option } = Select;
+
+const client = generateClient(); // Initialize the client
 
 const CreateOrderPage = () => {
   const { t } = useTranslation();
@@ -17,8 +20,8 @@ const CreateOrderPage = () => {
 
   const onFinish = async (values) => {
     try {
-      const userInfo = await Amplify.Auth.currentAuthenticatedUser(); // Corrected: Use Amplify.Auth
-      const userID = userInfo.attributes.sub;
+      const user = await getCurrentUser(); // Use getCurrentUser
+      const userID = user.userId; // Access userId
 
       const orderDetails = {
         whatToTransport: values.whatToTransport,
@@ -31,7 +34,7 @@ const CreateOrderPage = () => {
         userID: userID,
       };
 
-      await Amplify.API.graphql({ // Use Amplify.API
+      await client.graphql({ // Use the client
         query: createOrder,
         variables: { input: orderDetails },
       });
@@ -129,5 +132,5 @@ const CreateOrderPage = () => {
   );
 };
 
-// Wrap the component with the HOC before exporting
-export default withAuthenticator(CreateOrderPage);
+// Export the component
+export default CreateOrderPage;
