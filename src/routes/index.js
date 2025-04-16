@@ -7,6 +7,7 @@ import HomePage from '../pages/HomePage'; // Import the HomePage component
 import CreateOrderPage from '../pages/CreateOrderPage'; // Import the CreateOrderPage component
 import BecomeLuggerPage from '../pages/BecomeLuggerPage'; // Import the BecomeLuggerPage component
 import ServiceDetailPage from '../pages/ServiceDetailPage'; // Import the ServiceDetailPage component
+import EstimatePage from '../pages/EstimatePage'; // Import the EstimatePage component
 // Import page components here later
 // ... other pages
 
@@ -21,6 +22,7 @@ const AppRoutes = () => {
         <Route path="/create-order" element={<CreateOrderPage />} />
         <Route path="/become-lugger" element={<BecomeLuggerPage />} /> {/* Add route for BecomeLuggerPage */}
         <Route path="/services/:serviceSlug" element={<ServiceDetailPage />} /> {/* Add dynamic route for service details */}
+        <Route path="/estimate" element={<EstimatePage />} /> {/* Add route for EstimatePage */}
         {/* Add other main application routes here */}
       </Route>
     </Routes>

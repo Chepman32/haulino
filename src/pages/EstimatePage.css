@@ -1,0 +1,25 @@
+/* Styles for EstimatePage component */
+
+.estimate-page-container {
+  /* Add overall container styles if needed */
+}
+
+.map-placeholder {
+  border: 1px dashed #ccc;
+  background-color: #f8f8f8;
+  color: #999;
+  text-align: center;
+  padding: 20px;
+  min-height: 400px; /* Ensure it has some height */
+}
+
+.estimate-details .ant-tabs-tab {
+  /* Style truck type tabs if needed */
+}
+
+.estimate-details .ant-radio-button-wrapper {
+ /* Style item size buttons if needed */
+ margin-bottom: 5px; /* Add spacing for wrapped buttons */
+}
+
+/* Add more specific styles as needed */

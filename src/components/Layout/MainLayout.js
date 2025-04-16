@@ -102,7 +102,7 @@ const MainLayout = () => {
           </Menu>
 
           {/* Buttons on the right */}
-          <Button type="default" style={{ marginLeft: '16px' }}>Get estimate</Button>
+          <Button type="default" style={{ marginLeft: '16px' }} onClick={() => navigate('/estimate')}>Get estimate</Button>
           {user ? (
              <Button type="primary" style={{ marginLeft: '8px' }} onClick={signOut}>Sign out</Button>
           ) : (
