@@ -1,13 +1,14 @@
 import React from "react";
-import { Layout, Menu, Button, Dropdown, Row, Col, Typography } from "antd"; // Import Row, Col, Typography
-import { GlobalOutlined } from "@ant-design/icons";
-import { Outlet, Link, useNavigate } from "react-router-dom"; // Used to render child routes, Import useNavigate
+import { Layout, Menu, Button, Dropdown, Row, Col, Typography } from "antd"; // Dropdown is already imported
+// Import placeholder icons (replace with actual icons later)
+import { HomeOutlined, ApartmentOutlined, ReadOutlined, ShopOutlined, TeamOutlined, CarOutlined, FacebookOutlined, ShoppingCartOutlined, ToolOutlined, DeleteOutlined, HeartOutlined, UserOutlined } from "@ant-design/icons";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useAuthenticator } from '@aws-amplify/ui-react'; // Import the hook
-import "./MainLayout.css"; // Import styles
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import "./MainLayout.css";
 
 const { Header, Content, Footer } = Layout;
-const { Title, Paragraph, Text } = Typography; // Destructure Typography components
+const { Title, Paragraph, Text } = Typography;
 
 const MainLayout = () => {
   const { t, i18n } = useTranslation(); // Get i18n instance
@@ -26,6 +27,45 @@ const MainLayout = () => {
       <Menu.Item key="ru">Русский</Menu.Item>
     </Menu>
   );
+
+  // Define services for the dropdown
+  const services = [
+    { key: 'home-moving', title: 'Home moving', icon: <HomeOutlined />, path: '/services/home-moving' },
+    { key: 'apartment-moving', title: 'Apartment moving', icon: <ApartmentOutlined />, path: '/services/apartment-moving' },
+    { key: 'college-moving', title: 'College moving', icon: <ReadOutlined />, path: '/services/college-moving' },
+    { key: 'storage-moving', title: 'Storage moving', icon: <ShopOutlined />, path: '/services/storage-moving' },
+    { key: 'office-moving', title: 'Office moving', icon: <TeamOutlined />, path: '/services/office-moving' },
+    { key: 'furniture-delivery', title: 'Furniture delivery', icon: <CarOutlined />, path: '/services/furniture-delivery' },
+    { key: 'fb-marketplace-delivery', title: 'FB Marketplace delivery', icon: <FacebookOutlined />, path: '/services/fb-marketplace-delivery' },
+    { key: 'craigslist-delivery', title: 'Craigslist delivery', icon: <ShoppingCartOutlined />, path: '/services/craigslist-delivery' },
+    { key: 'appliance-delivery', title: 'Appliance delivery', icon: <ToolOutlined />, path: '/services/appliance-delivery' },
+    { key: 'junk-removal', title: 'Junk removal', icon: <DeleteOutlined />, path: '/services/junk-removal' },
+    { key: 'donation-pickup', title: 'Donation pick up', icon: <HeartOutlined />, path: '/services/donation-pickup' },
+    { key: 'labor-only', title: 'Labor only', icon: <UserOutlined />, path: '/services/labor-only' },
+  ];
+
+  // Create the dropdown menu content with two columns
+  const servicesMenu = (
+    <Menu style={{ width: 400, padding: '10px' }}> {/* Adjust width as needed */}
+      <Row gutter={16}>
+        <Col span={12}>
+          {services.slice(0, Math.ceil(services.length / 2)).map(service => (
+            <Menu.Item key={service.key} icon={service.icon}>
+              <Link to={service.path}>{service.title}</Link>
+            </Menu.Item>
+          ))}
+        </Col>
+        <Col span={12}>
+          {services.slice(Math.ceil(services.length / 2)).map(service => (
+            <Menu.Item key={service.key} icon={service.icon}>
+              <Link to={service.path}>{service.title}</Link>
+            </Menu.Item>
+          ))}
+        </Col>
+      </Row>
+    </Menu>
+  );
+
 
   return (
     <Layout className="main-layout">
@@ -50,7 +90,12 @@ const MainLayout = () => {
             style={{ lineHeight: "64px", borderBottom: "none", background: 'transparent' }}
             selectable={false}
           >
-            <Menu.Item key="services"><Link to="/services" style={{ color: "white" }}>Services</Link></Menu.Item>
+            {/* Services Dropdown */}
+            <Dropdown overlay={servicesMenu} trigger={['hover']}>
+              <a className="ant-dropdown-link" onClick={e => e.preventDefault()} style={{ color: "white", display: 'inline-block', lineHeight: '64px', padding: '0 15px' }}>
+                Services
+              </a>
+            </Dropdown>
             <Menu.Item key="cities"><Link to="/cities" style={{ color: "white" }}>Cities</Link></Menu.Item>
             <Menu.Item key="retailers"><Link to="/retailers" style={{ color: "white" }}>Retailers</Link></Menu.Item>
             <Menu.Item key="become-lugger"><Link to="/become-lugger" style={{ color: "white" }}>Become a Lugger</Link></Menu.Item>
