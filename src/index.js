@@ -1,6 +1,8 @@
 /* eslint-disable import/first */
+/* eslint-disable import/first */
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import 'antd/dist/reset.css'; // Import Ant Design styles
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

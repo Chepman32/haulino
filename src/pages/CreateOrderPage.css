@@ -1,12 +1,33 @@
-.create-order-container {
-  width: 600px;
-  margin: 50px auto;
+.create-order-page {
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
 }
 
-.create-order-container h2 {
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.city-item {
+  text-align: center;
+  cursor: pointer;
+  min-height: 150px; /* Ensure a minimum height */
+}
+
+.city-item img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+}
+
+.selected-city-banner {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.large-city-photo {
+  width: 100%;
+  max-width: 600px; /* Adjust as needed */
+  height: auto;
+  margin-bottom: 10px;
 }

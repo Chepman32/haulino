@@ -1,140 +1,73 @@
-import React, { useEffect } from 'react';
-import { Form, Input, Button, Select, DatePicker, Typography } from 'antd'; // Removed InputNumber as it wasn't used
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { Amplify } from 'aws-amplify';
-import '@aws-amplify/ui-react/styles.css'; // Import styles for the Authenticator
-import { createOrder } from '../graphql/mutations';
+import React from 'react';
 import './CreateOrderPage.css';
-import { getCurrentUser } from 'aws-amplify/auth';
-import { generateClient } from 'aws-amplify/api'; // Import generateClient
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const { Title } = Typography;
-const { Option } = Select;
-
-const client = generateClient(); // Initialize the client
+const cities = [
+  { name: 'New York', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'Los Angeles', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'Chicago', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'Houston', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'Phoenix', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'Philadelphia', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'San Antonio', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'San Diego', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'Dallas', imageUrl: 'https://via.placeholder.com/150' },
+  { name: 'San Jose', imageUrl: 'https://via.placeholder.com/150' },
+]; // Placeholder list
 
 const CreateOrderPage = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const selectedCityName = searchParams.get('city');
+  const selectedCity = cities.find(city => city.name === selectedCityName);
 
-  useEffect(() => {
-    document.title = "Haulino - cities";
-  }, []);
-
-  const onFinish = async (values) => {
-    try {
-      const user = await getCurrentUser(); // Use getCurrentUser
-      const userID = user.userId; // Access userId
-
-      const orderDetails = {
-        whatToTransport: values.whatToTransport,
-        fromAddress: values.fromAddress,
-        toAddress: values.toAddress,
-        dateAndTime: values.dateAndTime,
-        transportType: values.transportType,
-        numLoaders: values.numLoaders ? parseInt(values.numLoaders) : 0,
-        description: values.description,
-        userID: userID,
-      };
-
-      await client.graphql({ // Use the client
-        query: createOrder,
-        variables: { input: orderDetails },
-      });
-
-      console.log('Order created successfully!');
-      // After successful order creation, redirect to order confirmation page or similar
-      // navigate('/order-confirmation');
-    } catch (error) {
-      console.error('Error creating order:', error);
-    }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+  const handleCityClick = (city) => {
+    navigate(`/create-order?city=${city}`);
   };
 
   return (
-    <div className="create-order-container">
-      <Title level={2}>{t('createOrder.title')}</Title>
-      <Form
-        name="createOrderForm"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        layout="vertical"
-      >
-        <Form.Item
-          label={t('createOrder.whatToTransport')}
-          name="whatToTransport"
-          rules={[{ required: true, message: t('createOrder.whatToTransport.required') }]}
-        >
-          <Input />
-        </Form.Item>
+    <div className="create-order-page">
+      {selectedCity && (
+        <div className="selected-city-banner">
+          <img src={selectedCity.imageUrl} alt={selectedCity.name} className="large-city-photo" />
+          <h2>Booking for {selectedCity.name}</h2>
+        </div>
+      )}
+      <div className="header">
+        <h1>Cities we service | Lugg</h1>
+        <p>On-demand movers</p>
+        <p>Services</p>
+        <p>Cities</p>
+        <p>Retailers</p>
+        <p>Become a Lugger</p>
+        <p>Get estimate</p>
+        <p>Sign in</p>
+      </div>
 
-        <Form.Item
-          label={t('createOrder.fromAddress')}
-          name="fromAddress"
-          rules={[{ required: true, message: t('createOrder.fromAddress.required') }]}
-        >
-          <Input />
-        </Form.Item>
+      <div className="main-content">
+        <h2>Book now</h2>
+        <p>On-demand movers nationwide</p>
+        <p>Moving help in hundreds of cities across the United States. Big or small, get the most affordable rates for movers in your city.</p>
 
-        <Form.Item
-          label={t('createOrder.toAddress')}
-          name="toAddress"
-          rules={[{ required: true, message: t('createOrder.toAddress.required') }]}
-        >
-          <Input />
-        </Form.Item>
+        <div className="pickup-details">
+          <h3>Pick up from</h3>
+          <p>Pickup address</p>
+          <h3>Move to</h3>
+          <p>Drop-off address</p>
+          <p>See prices</p>
+        </div>
 
-        <Form.Item
-          label={t('createOrder.dateAndTime')}
-          name="dateAndTime"
-          rules={[{ required: true, message: t('createOrder.dateAndTime.required') }]}
-        >
-          <DatePicker showTime format="YYYY-MM-DD HH:mm" />
-        </Form.Item>
-
-        <Form.Item
-          label={t('createOrder.transportType')}
-          name="transportType"
-          rules={[{ required: true, message: t('createOrder.transportType.required') }]}
-        >
-          <Select placeholder={t('createOrder.transportType.placeholder')}>
-            <Option value="pickup">{t('createOrder.transportType.pickup')}</Option>
-            <Option value="boxTruck">{t('createOrder.transportType.boxTruck')}</Option>
-            {/* Add more transport types as needed */}
-          </Select>
-        </Form.Item>
-
-        <Form.Item
-          label={t('createOrder.numLoaders')}
-          name="numLoaders"
-        >
-          <Select placeholder={t('createOrder.numLoaders.placeholder')}>
-            <Option value="0">{t('createOrder.numLoaders.none')}</Option>
-            <Option value="1">1 {t('createOrder.numLoaders.person')}</Option>
-            <Option value="2">2 {t('createOrder.numLoaders.people')}</Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item
-          label={t('createOrder.description')}
-          name="description"
-        >
-          <Input.TextArea rows={4} />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            {t('createOrder.button')}
-          </Button>
-        </Form.Item>
-      </Form>
+        <div className="city-grid">
+          {cities.map((city) => (
+            <div className="city-item" key={city.name} onClick={() => handleCityClick(city.name)}>
+              <img src={city.imageUrl} alt={city.name} />
+              <h3>{city.name}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-// Export the component
 export default CreateOrderPage;

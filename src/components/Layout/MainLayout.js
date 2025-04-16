@@ -106,9 +106,19 @@ const MainLayout = () => {
           {user ? (
              <Button type="primary" style={{ marginLeft: '8px' }} onClick={signOut}>Sign out</Button>
           ) : (
-             <Button type="primary" style={{ marginLeft: '8px' }} onClick={() => navigate('/create-order')}>Sign in</Button> // Navigate to auth page
+             <Button type="primary" style={{ marginLeft: '8px' }} onClick={() => navigate('/create-order')}>Sign in</Button>
           )}
-          {/* Language switcher removed for now */}
+          <Button
+            type="primary"
+            style={{
+              marginLeft: '8px',
+              background: 'linear-gradient(to right, #007bff, #ff0000)',
+              borderColor: '#007bff',
+            }}
+            onClick={() => navigate('/create-order')}
+          >
+            Book now
+          </Button>
         </div>
       </Header>
       <Content className="main-layout-content">
