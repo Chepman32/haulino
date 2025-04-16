@@ -1,9 +1,10 @@
 .main-layout {
   min-height: 100vh; /* Ensure layout takes full viewport height */
+  font-family: Arial, sans-serif;
 }
 
 .main-layout-header {
-  background: #1A2A44; /* Midnight Blue */
+  background: #007bff;
   color: #FFFFFF; /* White text */
   padding: 0 24px; /* Add some padding */
   display: flex;
@@ -12,10 +13,11 @@
 }
 
 .logo {
-  color: white;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
   margin-right: 20px; /* Add some spacing between logo and menu */
+  font-family: Helvetica, sans-serif;
 }
 
 /* Ensure menu items are always visible */
@@ -48,8 +50,8 @@
 
 .main-layout-footer {
   text-align: center;
-  background-color: #f0f2f5; /* Light grey background */
+  background-color: #fff; /* White background */
   padding: 12px 24px;
   font-size: 0.9em;
-  color: #555;
+  color: #333; /* Dark text */
 }
