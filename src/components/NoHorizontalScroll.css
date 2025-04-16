@@ -1,0 +1,28 @@
+/* Global fix for horizontal scrolling */
+html, body, #root, .ant-layout, .ant-layout-content {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Fix for Ant Design components */
+.ant-row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+/* Fix for any container that might cause overflow */
+div {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Fix for images that might cause overflow */
+img {
+  max-width: 100% !important;
+  height: auto !important;
+}

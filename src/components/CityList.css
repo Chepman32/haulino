@@ -1,0 +1,77 @@
+/* Global fixes for horizontal scroll */
+body, html {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Container styles */
+.city-list-container {
+  width: 100% !important;
+  max-width: 100vw !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+/* Fix Ant Design row and column issues */
+.ant-row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.ant-col {
+  padding-right: 4px !important;
+  padding-left: 4px !important;
+  box-sizing: border-box !important;
+}
+
+.ant-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+.ant-card-body {
+  padding: 12px !important;
+}
+
+/* Mobile styles */
+@media (max-width: 576px) {
+  .city-list-container {
+    padding: 0 !important;
+  }
+  
+  .ant-card {
+    margin-bottom: 8px !important;
+  }
+  
+  .ant-card-cover img {
+    height: 180px !important;
+  }
+  
+  .ant-row {
+    margin: 0 !important;
+  }
+  
+  .ant-col {
+    padding: 4px !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Ensure cards take full width on mobile */
+@media (max-width: 767px) {
+  .ant-col {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
