@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Row, Col, Typography, Input, Button, Card, Radio, Tabs } from 'antd';
 import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 // Removed EnvironmentOutlined as we'll use the actual map
@@ -46,6 +46,10 @@ const EstimatePage = () => {
 
   const onUnmountMap = useCallback(function callback(map) {
     setMap(null);
+  }, []);
+
+  useEffect(() => {
+    document.title = "Haulino - cities";
   }, []);
 
   const onLoadPickupAutocomplete = useCallback((autocomplete) => {

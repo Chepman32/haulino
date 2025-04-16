@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Typography, Input, Button, Radio, Card, Select } from 'antd';
 import './BecomeLuggerPage.css'; // Create this CSS file next
 
@@ -17,6 +17,10 @@ const BecomeLuggerPage = () => {
   const [canLift, setCanLift] = useState(null);
   const [hasTruck, setHasTruck] = useState(null);
   const [canWorkWeekend, setCanWorkWeekend] = useState(null);
+
+  useEffect(() => {
+    document.title = "Haulino - Become a Lugg Mover";
+  }, []);
 
   const handleGetStarted = () => {
     console.log('Form Data:', {

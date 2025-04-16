@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Select, DatePicker, Typography } from 'antd'; // Removed InputNumber as it wasn't used
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,10 @@ const client = generateClient(); // Initialize the client
 const CreateOrderPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Haulino - cities";
+  }, []);
 
   const onFinish = async (values) => {
     try {

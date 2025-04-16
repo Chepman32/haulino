@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col, Typography } from 'antd';
 
@@ -15,6 +15,10 @@ const formatSlugToTitle = (slug) => {
 
 const ServiceDetailPage = () => {
   const { serviceSlug } = useParams(); // Get the dynamic part of the URL
+
+  useEffect(() => {
+    document.title = `Haulino - ${formatSlugToTitle(serviceSlug)} `;
+  }, [serviceSlug]);
 
   const serviceTitle = formatSlugToTitle(serviceSlug);
 

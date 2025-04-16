@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState, useEffect } from 'react'; // Import useState
 import { Button, Card, Col, Input, Row, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,10 @@ const { Title, Paragraph } = Typography;
 const HomePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Haulino - cities";
+  }, []);
 
   // State for address inputs
   const [pickupAddress, setPickupAddress] = useState('');
