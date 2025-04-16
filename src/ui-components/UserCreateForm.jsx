@@ -100,16 +100,17 @@ export default function UserCreateForm(props) {
               modelFields[key] = null;
             }
           });
+          const { id, ...modelFieldsWithoutId } = modelFields;
           await client.graphql({
             query: createUser.replaceAll("__typename", ""),
             variables: {
               input: {
-                ...modelFields,
+                ...modelFieldsWithoutId,
               },
             },
           });
           if (onSuccess) {
-            onSuccess(modelFields);
+            onSuccess(modelFieldsWithoutId);
           }
           if (clearOnSuccess) {
             resetStateValues();
