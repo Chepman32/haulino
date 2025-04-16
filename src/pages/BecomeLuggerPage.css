@@ -1,0 +1,17 @@
+/* Styles for BecomeLuggerPage component */
+
+.become-lugger-container {
+  /* Add overall container styles if needed */
+}
+
+.become-lugger-hero {
+  /* Styles for the hero section */
+  background-color: #e6f7ff; /* Example light blue background */
+}
+
+/* Add more specific styles for form, sections, cards, etc. as needed */
+
+/* Example: Add some margin to cards */
+.ant-card {
+  margin-bottom: 16px;
+}
