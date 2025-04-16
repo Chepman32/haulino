@@ -1,70 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CreateOrderPage.css';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { generateClient } from "aws-amplify/api";
+import { getCurrentUser } from "aws-amplify/auth";
 
-const cities = [
-  { name: 'New York', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'Los Angeles', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'Chicago', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'Houston', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'Phoenix', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'Philadelphia', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'San Antonio', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'San Diego', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'Dallas', imageUrl: 'https://via.placeholder.com/150' },
-  { name: 'San Jose', imageUrl: 'https://via.placeholder.com/150' },
-]; // Placeholder list
+const client = generateClient();
 
 const CreateOrderPage = () => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const selectedCityName = searchParams.get('city');
-  const selectedCity = cities.find(city => city.name === selectedCityName);
+  const [pickupAddress, setPickupAddress] = useState('');
+  const [dropoffAddress, setDropoffAddress] = useState('');
 
-  const handleCityClick = (city) => {
-    navigate(`/create-order?city=${city}`);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const user = await getCurrentUser();
+      const orderDetails = {
+        pickupAddress: pickupAddress,
+        dropoffAddress: dropoffAddress,
+        userId: user.userId, // Assuming user object has a userId
+      };
+
+      // Replace 'createOrder' with the actual mutation name in your GraphQL schema
+      const mutation = `
+        mutation CreateOrder($pickupAddress: String!, $dropoffAddress: String!, $userId: ID!) {
+          createOrder(pickupAddress: $pickupAddress, dropoffAddress: $dropoffAddress, userId: $userId) {
+            id
+            pickupAddress
+            dropoffAddress
+            userId
+          }
+        }
+      `;
+
+      const variables = {
+        pickupAddress: orderDetails.pickupAddress,
+        dropoffAddress: orderDetails.dropoffAddress,
+        userId: orderDetails.userId,
+      };
+
+      const response = await client.graphql({
+        query: mutation,
+        variables: variables,
+      });
+
+      console.log('Order created:', response);
+      // Optionally, redirect the user or display a success message
+    } catch (error) {
+      console.error('Error creating order:', error);
+      // Display an error message to the user
+    }
   };
 
   return (
     <div className="create-order-page">
-      {selectedCity && (
-        <div className="selected-city-banner">
-          <img src={selectedCity.imageUrl} alt={selectedCity.name} className="large-city-photo" />
-          <h2>Booking for {selectedCity.name}</h2>
-        </div>
-      )}
       <div className="header">
-        <h1>Cities we service | Lugg</h1>
-        <p>On-demand movers</p>
-        <p>Services</p>
-        <p>Cities</p>
-        <p>Retailers</p>
-        <p>Become a Lugger</p>
-        <p>Get estimate</p>
-        <p>Sign in</p>
+        <h1>Create Order</h1>
       </div>
 
       <div className="main-content">
-        <h2>Book now</h2>
-        <p>On-demand movers nationwide</p>
-        <p>Moving help in hundreds of cities across the United States. Big or small, get the most affordable rates for movers in your city.</p>
-
-        <div className="pickup-details">
-          <h3>Pick up from</h3>
-          <p>Pickup address</p>
-          <h3>Move to</h3>
-          <p>Drop-off address</p>
-          <p>See prices</p>
-        </div>
-
-        <div className="city-grid">
-          {cities.map((city) => (
-            <div className="city-item" key={city.name} onClick={() => handleCityClick(city.name)}>
-              <img src={city.imageUrl} alt={city.name} />
-              <h3>{city.name}</h3>
-            </div>
-          ))}
-        </div>
+        <h2>Enter Order Details</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="pickupAddress">Pickup Address:</label>
+            <input
+              type="text"
+              id="pickupAddress"
+              value={pickupAddress}
+              onChange={(e) => setPickupAddress(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="dropoffAddress">Drop-off Address:</label>
+            <input
+              type="text"
+              id="dropoffAddress"
+              value={dropoffAddress}
+              onChange={(e) => setDropoffAddress(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Create Order</button>
+        </form>
       </div>
     </div>
   );
